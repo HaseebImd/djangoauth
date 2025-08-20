@@ -1,0 +1,33 @@
+# Django
+*.pyc
+__pycache__/
+db.sqlite3
+.env
+*.log
+*.pot
+*.py[cod]
+*.sqlite3
+*.pyo
+*.pyd
+*.swp
+.DS_Store
+media/
+staticfiles/
+venv/
+.env.*
+.idea/
+.vscode/
+*.egg-info/
+*.bak
+*.orig
+*.coverage
+htmlcov/
+.coverage.*
+.mypy_cache/
+.pytest_cache/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
