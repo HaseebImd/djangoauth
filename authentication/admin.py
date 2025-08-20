@@ -1,46 +1,19 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, Address
+from .models import CustomUser, Address, Role, RolePermission
 
+admin.site.site_header = "Authentication Admin"
+admin.site.site_title = "Authentication Admin Portal"
+admin.site.index_title = "Welcome to the Authentication Admin Portal"
+admin.site.enable_nav_sidebar = False
+admin.site.site_url = None  # Disable the admin site URL to prevent redirection
+admin.site.empty_value_display = "N/A"  # Display 'N/A' for empty
+admin.site.default_permissions = ()  # Disable default permissions
+admin.site.has_permission = (
+    lambda request: request.user.is_authenticated
+)  # Ensure only authenticated users can access the admin site
 
-@admin.register(CustomUser)
-class CustomUserAdmin(UserAdmin):
-    model = CustomUser
-    list_display = ("email", "phone_number", "is_staff", "is_active")
-    list_filter = ("is_staff", "is_active")
-    fieldsets = (
-        (None, {"fields": ("email", "password", "phone_number", "address")}),
-        (
-            "Permissions",
-            {
-                "fields": (
-                    "is_staff",
-                    "is_active",
-                    "is_superuser",
-                    "groups",
-                    "user_permissions",
-                )
-            },
-        ),
-    )
-    add_fieldsets = (
-        (
-            None,
-            {
-                "classes": ("wide",),
-                "fields": (
-                    "email",
-                    "password1",
-                    "password2",
-                    "phone_number",
-                    "is_staff",
-                    "is_active",
-                ),
-            },
-        ),
-    )
-    search_fields = ("email",)
-    ordering = ("email",)
-
-
+admin.site.register(CustomUser)
 admin.site.register(Address)
+admin.site.register(Role)
+admin.site.register(RolePermission)
